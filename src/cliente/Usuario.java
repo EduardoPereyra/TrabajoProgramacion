@@ -1,51 +1,24 @@
 package cliente;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import pelicula.Pelicula;
 
-public class Usuario extends Cliente{
-	private int edad;
-	private ArrayList<String> generos_preferidos = new ArrayList<>();
-	private ArrayList<Pelicula> peliculas_vistas = new ArrayList<>();
+public abstract class Usuario { //Modicifacr los nombres de las clases
+	private String nombre;
 	
 	//gets y sets
-	public int getEdad() {
-		return edad;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public void setGeneroPreferido(String genero_preferido) {
-		this.generos_preferidos.add(genero_preferido);
-	}
-		
-	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
-		if(!this.contienePelicula(pelicula)) {
-			if((granos_cafe < 6)&& (granos_cafe > 0)){
-				pelicula.setTotalVotos(granos_cafe);
-				this.setPeliculaVista(pelicula);
-			}
-		}
-	}
-		
-	public Iterator<Pelicula> getPeliculasVistas() {
-		return this.peliculas_vistas.iterator();
-	}
-	
-	public Iterator<String> getGenerosPreferidos(){
-		return this.generos_preferidos.iterator();
-	}
-	
-	//private
-	private void setPeliculaVista(Pelicula pelicula_vista) {
-		this.peliculas_vistas.add(pelicula_vista);
-	}
-	
-	private boolean contienePelicula(Pelicula p) {
-		return this.peliculas_vistas.contains(p);
-	}
+	public abstract Iterator<String> getGenerosPreferidos();
 
+
+	protected abstract void valorarPelicula(Pelicula pelicula,int granos_cafe);
+	
+	public abstract Iterator<Pelicula> getPeliculasVistas();
 }
