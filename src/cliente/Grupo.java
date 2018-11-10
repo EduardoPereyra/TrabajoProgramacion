@@ -8,7 +8,7 @@ public class Grupo extends Usuario{
 	private ArrayList<Usuario> usuarios;
 	
 	//Contructor
-	public Grupo(String nombre) {
+	public Grupo(String nombre) {	
 		super(nombre);
 		this.usuarios = new ArrayList<>();
 	}

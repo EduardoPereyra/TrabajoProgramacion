@@ -5,7 +5,7 @@ import java.util.Iterator;
 import cliente.Usuario;
 import pelicula.Pelicula;
 
-public class ContieneTodosGeneros {
+public class ContieneTodosGeneros extends CondicionPelicula{
 
 	public boolean cumple(Usuario u,Pelicula p) {
 		ArrayList<String> categorias = p.getCategorias();

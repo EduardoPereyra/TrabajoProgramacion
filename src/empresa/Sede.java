@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 import buscador.Busqueda;
 import cliente.Usuario;
+import comparator.ComparadorPorVistas;
 import condicion.CondicionPelicula;
+import condicion.ContieneAlgunGenero;
 import pelicula.Pelicula;
 
 public class Sede /*extends Busqueda*/{
@@ -17,10 +19,10 @@ public class Sede /*extends Busqueda*/{
 	private String nombre;
 	
 	//Contructor
-	public Sede(String nombre, Comparator<Pelicula> comparador, CondicionPelicula condicionPelicula) {
+	public Sede(String nombre) {
 		this.nombre = nombre;
-		this.comparador = comparador; 
-		this.condicionPelicula = condicionPelicula;
+		this.comparador  = new ComparadorPorVistas();
+		this.condicionPelicula = new ContieneAlgunGenero();
 		this.peliculas = new ArrayList<>();
 		this.usuarios = new ArrayList<>();
 	}
@@ -34,8 +36,8 @@ public class Sede /*extends Busqueda*/{
 		return this.peliculas.iterator();
 	}
 
-	public void setPeliculas(Pelicula peliculas) {
-		this.peliculas.add(peliculas);
+	public void setPelicula(Pelicula pelicula) {
+		this.peliculas.add(pelicula);
 	}
 
 	public Iterator<Usuario> getUsuarios() {
