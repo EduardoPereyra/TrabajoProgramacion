@@ -7,6 +7,13 @@ import pelicula.Pelicula;
 public class Grupo extends Usuario{
 	private ArrayList<Usuario> usuarios;
 	
+	//Contructor
+	public Grupo(String nombre) {
+		super(nombre);
+		this.usuarios = new ArrayList<>();
+	}
+	
+	//Gets y Sets
 	public void setCliente(Usuario c) {
 		this.usuarios.add(c);
 	}
@@ -21,12 +28,6 @@ public class Grupo extends Usuario{
 		}
 		return  generos_preferidos.iterator();			
 	}
-	
-	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
-		for(int i = 0; i < this.usuarios.size(); i++) {
-			this.usuarios.get(i).valorarPelicula(pelicula,granos_cafe);
-		}		
-	}
 
 	public Iterator<Pelicula> getPeliculasVistas() {
 		ArrayList<Pelicula> peliculasvistas = new ArrayList<>();
@@ -37,5 +38,21 @@ public class Grupo extends Usuario{
 			}
 		}
 		return  peliculasvistas.iterator();
+	}
+	
+	//Funciones
+	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
+		for(int i = 0; i < this.usuarios.size(); i++) {
+			this.usuarios.get(i).valorarPelicula(pelicula,granos_cafe);
+		}		
+	}
+	
+	public boolean noLaVio(Pelicula pelicula) {
+		for(int i = 0; i < this.usuarios.size(); i++) {
+			if(this.usuarios.get(i).noLaVio(pelicula)) { //si algun usuario la vio ya no es recomendable
+				return false;
+			}
+		}
+		return true;
 	}
 }

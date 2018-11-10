@@ -3,10 +3,10 @@ package pelicula;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-
 import cliente.Persona;
 
 public class Pelicula {
+	private Hashtable <Persona,Integer> votos;
 	private ArrayList<String> actores;
 	private ArrayList<String> directores;
 	private ArrayList<String> categorias;
@@ -14,9 +14,8 @@ public class Pelicula {
 	private String sinopsis;
 	private int anio_estreno;
 	private int duracion;
-	private Hashtable <Persona,Integer> votos;
-	private int veces_vista;
 	
+	//Contructor
 	public Pelicula(String titulo, String sinopsis, int anio_estreno, int duracion) {
 		super();
 		this.actores = new ArrayList<>();
@@ -27,61 +26,72 @@ public class Pelicula {
 		this.sinopsis = sinopsis;
 		this.anio_estreno = anio_estreno;
 		this.duracion = duracion;
-		this.veces_vista = 0;
 	}
 	
-	//gets y sets
+	//Gets y Sets
 	public void setActor(String actor) {
 		this.actores.add(actor);
 	}
+	
 	public void setDirector(String director) {
 		this.actores.add(director);
 	}
+	
 	public void setCategoria(String categoria) {
 		this.actores.add(categoria);
 	}
-	public Iterator<String> getActores() {
-		return this.actores.iterator();
+	
+	public ArrayList<String> getActores() {
+		return new ArrayList<String>(this.actores);
 	}
-	public Iterator<String> getDirectores() {
-		return this.directores.iterator();
+	
+	public ArrayList<String> getDirectores() {
+		return new ArrayList<String>(this.directores);
 	}
-	public Iterator<String> getCategorias() {
-		return this.categorias.iterator();
+	
+	public ArrayList<String> getCategorias() {
+		return new ArrayList<String>(this.categorias);
+		
 	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
+	
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 	public String getSinopsis() {
 		return sinopsis;
 	}
+	
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
 	}
+	
 	public int getAnioEstreno() {
 		return anio_estreno;
 	}
+	
 	public void setAnioEstreno(int anio_estreno) {
 		this.anio_estreno = anio_estreno;
 	}
+	
 	public int getDuracion() {
 		return duracion;
 	}
+	
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
-	public int getCantidadVotos() {
-		return this.votos.size();
-	}
+
 	public void setVoto(Persona persona, int voto) {
 		Integer n = (Integer) voto;
 		this.votos.put(persona, n);
 	}
-	public int getVecesVista() {
-		return veces_vista;
+	
+	public int getVecesVista() { //Para agregar una pelicula como vista tiene que votarla
+		return this.votos.size();
 	}	
 	
 	public double getPuntuacionPromedio() {
@@ -91,7 +101,19 @@ public class Pelicula {
 			Persona persona = iteVotos.next();
 			suma += this.votos.get(persona);
 		}
-		return suma/getCantidadVotos();
+		return suma/getVecesVista();
 	}
-
+	
+	//Funciones
+	public boolean contieneCategoria(String c) {
+		return this.categorias.contains(c);
+	}
+	
+	//Equals
+	public boolean equals(Pelicula p) {
+		if(this.titulo == p.getTitulo()) {
+			return true;
+		}
+		return false;
+	}
 }

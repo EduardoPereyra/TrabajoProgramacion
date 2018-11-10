@@ -6,10 +6,18 @@ import pelicula.Pelicula;
 
 public class Persona extends Usuario{
 	private int edad;
-	private ArrayList<String> generos_preferidos = new ArrayList<>();
-	private ArrayList<Pelicula> peliculas_vistas = new ArrayList<>();
+	private ArrayList<String> generos_preferidos;
+	private ArrayList<Pelicula> peliculas_vistas;
 	
-	//gets y sets
+	//Contructor
+	public Persona(String nombre, int edad) {
+		super(nombre);
+		this.edad = edad;
+		this.generos_preferidos = new ArrayList<>();
+		this.peliculas_vistas = new ArrayList<>();
+	}
+	
+	//Gets y Sets
 	public int getEdad() {
 		return edad;
 	}
@@ -22,15 +30,6 @@ public class Persona extends Usuario{
 		this.generos_preferidos.add(genero_preferido);
 	}
 		
-	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
-		if(!this.contienePelicula(pelicula)) {
-			if((granos_cafe < 6)&& (granos_cafe > 0)){
-				pelicula.setVoto(this,granos_cafe);
-				this.setPeliculaVista(pelicula);
-			}
-		}
-	}
-		
 	public Iterator<Pelicula> getPeliculasVistas() {
 		return this.peliculas_vistas.iterator();
 	}
@@ -39,7 +38,24 @@ public class Persona extends Usuario{
 		return this.generos_preferidos.iterator();
 	}
 	
-	//private
+	//Funciones
+	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
+		if(!this.contienePelicula(pelicula)) {
+			if((granos_cafe < 6)&& (granos_cafe > 0)){
+				pelicula.setVoto(this,granos_cafe);
+				this.setPeliculaVista(pelicula);
+			}
+		}
+	}
+	
+	public boolean noLaVio(Pelicula pelicula) {
+		if(!this.peliculas_vistas.contains(pelicula)) {
+			return true;
+		}
+		return false;
+	}
+	
+	//Private
 	private void setPeliculaVista(Pelicula pelicula_vista) {
 		this.peliculas_vistas.add(pelicula_vista);
 	}
