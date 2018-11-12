@@ -23,7 +23,9 @@ public class Grupo extends Usuario{
 		for(int i = 0; i < this.usuarios.size(); i++) {
 			Iterator<String> it = this.usuarios.get(i).getGenerosPreferidos();
 			while(it.hasNext()) {
-				generos_preferidos.add(it.next());
+				String aux = it.next();
+				if(!generos_preferidos.contains(aux))
+				generos_preferidos.add(aux);
 			}
 		}
 		return  generos_preferidos.iterator();			

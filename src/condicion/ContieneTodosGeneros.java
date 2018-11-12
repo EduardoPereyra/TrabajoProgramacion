@@ -1,19 +1,19 @@
 package condicion;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import cliente.Usuario;
 import pelicula.Pelicula;
 
-public class ContieneTodosGeneros extends CondicionPelicula{
+public class ContieneTodosGeneros implements CondicionPelicula{
 
 	public boolean cumple(Usuario u,Pelicula p) {
-		ArrayList<String> categorias = p.getCategorias();
-		Iterator<String> it = u.getGenerosPreferidos();
-		while(it.hasNext()) {
-			if(!categorias.contains(it.next())) {
+		
+		Iterator<String> itUsuario = u.getGenerosPreferidos();
+		while(itUsuario.hasNext()) {
+			if(!p.contieneCategoria(itUsuario.next())) {
 				return false;
 			}
+			itUsuario.next();
 		}
 		return true;
 	}

@@ -34,24 +34,26 @@ public class Pelicula {
 	}
 	
 	public void setDirector(String director) {
-		this.actores.add(director);
+		this.directores.add(director);
 	}
 	
 	public void setCategoria(String categoria) {
-		this.actores.add(categoria);
+		this.categorias.add(categoria);
 	}
 	
 	public ArrayList<String> getActores() {
-		return new ArrayList<String>(this.actores);
+		ArrayList<String> copy = new ArrayList<>(this.actores);
+		return copy;
 	}
 	
 	public ArrayList<String> getDirectores() {
-		return new ArrayList<String>(this.directores);
+		ArrayList<String> copy = new ArrayList<>(this.directores);
+		return copy;
 	}
 	
 	public ArrayList<String> getCategorias() {
-		return new ArrayList<String>(this.categorias);
-		
+		ArrayList<String> copy = new ArrayList<>(this.categorias);
+		return copy;		
 	}
 	
 	public String getTitulo() {
@@ -111,7 +113,7 @@ public class Pelicula {
 	
 	//Equals
 	public boolean equals(Pelicula p) {
-		if(this.titulo == p.getTitulo()) {
+		if(this.titulo.equals(p.getTitulo())) {
 			return true;
 		}
 		return false;

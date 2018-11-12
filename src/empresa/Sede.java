@@ -31,7 +31,11 @@ public class Sede /*extends Busqueda*/{
 	public void setComparador(Comparator<Pelicula> comparador) {
 		this.comparador = comparador;
 	}
-	
+
+	public void setCondicionPelicula(CondicionPelicula condicionPelicula) {
+		this.condicionPelicula = condicionPelicula;
+	}
+
 	public Iterator<Pelicula> getPeliculas() {
 		return this.peliculas.iterator();
 	}
@@ -39,7 +43,16 @@ public class Sede /*extends Busqueda*/{
 	public void setPelicula(Pelicula pelicula) {
 		this.peliculas.add(pelicula);
 	}
-
+	
+	public Pelicula getPelicula(String titulo) {
+		for(int i = 0; i < this.peliculas.size(); i++) {
+			if(this.peliculas.get(i).getTitulo().equals(titulo)) {
+				return this.peliculas.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public Iterator<Usuario> getUsuarios() {
 		return this.usuarios.iterator();
 	}
@@ -64,12 +77,15 @@ public class Sede /*extends Busqueda*/{
 	public ArrayList<Pelicula> recomendar(Usuario usuario,int cantidad_peliculas,CondicionPelicula c, Comparator<Pelicula> ordenamiento) {
 		ArrayList <Pelicula> peliculas_recomendables = new ArrayList<>();
 		for(Pelicula p : this.peliculas) {
-			if(usuario.noLaVio(p)&&(c.cumple(usuario, p))) {
+			if((usuario.noLaVio(p))&&(c.cumple(usuario, p))) {
 				peliculas_recomendables.add(p);
 			}
 		}
 		Collections.sort(peliculas_recomendables, ordenamiento.reversed());
-		return new ArrayList<Pelicula>(peliculas_recomendables.subList(0,cantidad_peliculas));
+		if(peliculas_recomendables.size() > cantidad_peliculas) {
+			return new ArrayList<Pelicula>(peliculas_recomendables.subList(0,cantidad_peliculas));
+		}
+		return peliculas_recomendables;
 	}
 
 	public ArrayList<Pelicula> busqueda(Busqueda buscar) {

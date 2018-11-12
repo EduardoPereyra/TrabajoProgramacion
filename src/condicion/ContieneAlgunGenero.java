@@ -4,7 +4,7 @@ import java.util.Iterator;
 import cliente.Usuario;
 import pelicula.Pelicula;
 
-public class ContieneAlgunGenero extends CondicionPelicula{
+public class ContieneAlgunGenero implements CondicionPelicula{
 	
 	public boolean cumple(Usuario u,Pelicula p) {
 			Iterator<String> it = u.getGenerosPreferidos();

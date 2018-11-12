@@ -11,7 +11,7 @@ public class BuscarAnio extends Busqueda{
 
 	@Override
 	public boolean filtro(Pelicula p){
-		return p.getAnioEstreno() == this.anio;
+		return p.getAnioEstreno() >= this.anio;
 	}
 
 }
