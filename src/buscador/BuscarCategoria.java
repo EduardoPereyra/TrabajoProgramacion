@@ -2,7 +2,7 @@ package buscador;
 
 import pelicula.Pelicula;
 
-public class BuscarCategoria extends Busqueda{
+public class BuscarCategoria implements Busqueda{
 	private String categoria;
 	
 	public BuscarCategoria(String categoria) {

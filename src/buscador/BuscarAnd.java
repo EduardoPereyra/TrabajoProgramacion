@@ -2,7 +2,7 @@ package buscador;
 
 import pelicula.Pelicula;
 
-public class BuscarAnd extends Busqueda{
+public class BuscarAnd implements Busqueda{
 	private Busqueda b1;
 	private Busqueda b2;
 	

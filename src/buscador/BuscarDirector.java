@@ -2,7 +2,7 @@ package buscador;
 
 import pelicula.Pelicula;
 
-public class BuscarDirector extends Busqueda{
+public class BuscarDirector implements Busqueda{
 	private String director;
 	
 	public BuscarDirector(String director) {

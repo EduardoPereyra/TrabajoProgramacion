@@ -2,7 +2,7 @@ package buscador;
 
 import pelicula.Pelicula;
 
-public class BuscarAnio extends Busqueda{
+public class BuscarAnio implements Busqueda{
 	private int anio;
 	
 	public BuscarAnio(int anio) {

@@ -2,6 +2,6 @@ package buscador;
 
 import pelicula.Pelicula;
 
-public abstract class Busqueda {
-	public abstract boolean filtro(Pelicula p);
+public interface Busqueda {
+	public boolean filtro(Pelicula p);
 }
