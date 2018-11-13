@@ -103,7 +103,10 @@ public class Pelicula {
 			Persona persona = iteVotos.next();
 			suma += this.votos.get(persona);
 		}
-		return suma/getVecesVista();
+		if(getVecesVista() != 0) {
+			return suma/getVecesVista();
+		}
+		return 0;
 	}
 	
 	//Funciones

@@ -40,7 +40,7 @@ public class Persona extends Usuario{
 	
 	//Funciones
 	public void valorarPelicula(Pelicula pelicula, int granos_cafe) {
-		if(!this.contienePelicula(pelicula)) {
+		if(!this.laVio(pelicula)) {
 			if((granos_cafe < 6)&& (granos_cafe > 0)){
 				pelicula.setVoto(this,granos_cafe);
 				this.setPeliculaVista(pelicula);
@@ -48,8 +48,8 @@ public class Persona extends Usuario{
 		}
 	}
 	
-	public boolean noLaVio(Pelicula pelicula) {
-		if(!this.peliculas_vistas.contains(pelicula)) {
+	public boolean laVio(Pelicula pelicula) {
+		if(this.peliculas_vistas.contains(pelicula)) {
 			return true;
 		}
 		return false;
@@ -59,9 +59,4 @@ public class Persona extends Usuario{
 	private void setPeliculaVista(Pelicula pelicula_vista) {
 		this.peliculas_vistas.add(pelicula_vista);
 	}
-	
-	private boolean contienePelicula(Pelicula p) {
-		return this.peliculas_vistas.contains(p);
-	}
-
 }

@@ -27,5 +27,5 @@ public abstract class Usuario {
 	
 	public abstract Iterator<Pelicula> getPeliculasVistas();
 	
-	public abstract boolean noLaVio(Pelicula pelicula);
+	public abstract boolean laVio(Pelicula pelicula);
 }

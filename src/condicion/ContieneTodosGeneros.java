@@ -13,7 +13,6 @@ public class ContieneTodosGeneros implements CondicionPelicula{
 			if(!p.contieneCategoria(itUsuario.next())) {
 				return false;
 			}
-			itUsuario.next();
 		}
 		return true;
 	}

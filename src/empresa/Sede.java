@@ -77,7 +77,7 @@ public class Sede /*extends Busqueda*/{
 	public ArrayList<Pelicula> recomendar(Usuario usuario,int cantidad_peliculas,CondicionPelicula c, Comparator<Pelicula> ordenamiento) {
 		ArrayList <Pelicula> peliculas_recomendables = new ArrayList<>();
 		for(Pelicula p : this.peliculas) {
-			if((usuario.noLaVio(p))&&(c.cumple(usuario, p))) {
+			if((!usuario.laVio(p))&&(c.cumple(usuario, p))) {
 				peliculas_recomendables.add(p);
 			}
 		}

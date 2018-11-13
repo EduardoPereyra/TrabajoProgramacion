@@ -18,12 +18,18 @@ public class Grupo extends Usuario{
 		this.usuarios.add(c);
 	}
 	
+	public ArrayList<Usuario> getClientes(){
+		ArrayList<Usuario> copy = new ArrayList<>(this.usuarios);
+		return copy;
+	}
+	
 	public Iterator<String> getGenerosPreferidos() {
 		ArrayList<String> generos_preferidos = new ArrayList<>();
-		for(int i = 0; i < this.usuarios.size(); i++) {
-			Iterator<String> it = this.usuarios.get(i).getGenerosPreferidos();
-			while(it.hasNext()) {
-				String aux = it.next();
+		Iterator<Usuario> itUsuarios = usuarios.iterator();
+		while (itUsuarios.hasNext()) {
+			Iterator<String> itGeneros = itUsuarios.next().getGenerosPreferidos();
+			while(itGeneros.hasNext()) {
+				String aux = itGeneros.next();
 				if(!generos_preferidos.contains(aux))
 				generos_preferidos.add(aux);
 			}
@@ -49,12 +55,12 @@ public class Grupo extends Usuario{
 		}		
 	}
 	
-	public boolean noLaVio(Pelicula pelicula) {
+	public boolean laVio(Pelicula pelicula) {
 		for(int i = 0; i < this.usuarios.size(); i++) {
-			if(this.usuarios.get(i).noLaVio(pelicula)) { //si algun usuario la vio ya no es recomendable
-				return false;
+			if(this.usuarios.get(i).laVio(pelicula)) { //si algun usuario la vio ya no es recomendable
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }
