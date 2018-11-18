@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import cliente.Grupo;
 import cliente.Persona;
+import cliente.Usuario;
 import buscador.BuscarActor;
 import buscador.BuscarAnd;
 import buscador.BuscarAnio;
@@ -22,6 +23,8 @@ public class Main {
 		
 		//Creacion sede
 		Sede pop_corn_time = new Sede("Pop Corn Time");
+		
+		MensajeBienvenida(pop_corn_time);
 		
 		//Creacion Personas
 		Persona lisa = new Persona("Lisa", 8);
@@ -149,7 +152,7 @@ public class Main {
 		toy_story.setCategoria("Aventura");
 		toy_story.setCategoria("Accion");
 		
-		Pelicula monstersinc = new Pelicula("Monsters Inc.",
+		Pelicula monstersinc = new Pelicula("Monsters Inc",
 											"Monsters, Incorporated es la fábrica de sustos más grande en el mundo de los"+ 
 											" monstruos y James P. Sullivan (John Goodman) es uno de sus mejores asustadores. Sullivan es un monstruo "+ 
 											"grande e intimidante de piel azul, grandes manchas color púrpura y cuernos. Su asistente, mejor amigo y "+ 
@@ -183,20 +186,14 @@ public class Main {
 		
 		
 		//1.Ver peliculas Marge
-		System.out.println("-------------------------------\n");		
-		System.out.println("1.Ver peliculas Marge");
-		Iterator<Pelicula> itPeliculas = marge.getPeliculasVistas();
-		while(itPeliculas.hasNext()) {
-			System.out.println("-"+itPeliculas.next().getTitulo()+".");
-		}
+		System.out.println("-------------------------------\n");
+		System.out.println("Ejercicio 1:");
+		VerPeliculasUsuario(marge);
 		
 		//2.Ver peliculas Bart
 		System.out.println("-------------------------------\n");
-		System.out.println("2.Ver peliculas Bart");
-		itPeliculas = bart.getPeliculasVistas();
-		while(itPeliculas.hasNext()) {
-			System.out.println("-"+itPeliculas.next().getTitulo()+".");
-		}
+		System.out.println("Ejercicio 2:");
+		VerPeliculasUsuario(bart);
 	
 		//3.Generar 2 recomendaciones para cada uno de los usuarios individuales y grupos creados,
 		//considerando que las películas incluyan TODOS los géneros preferidos por el usuario,
@@ -204,63 +201,25 @@ public class Main {
 		pop_corn_time.setCondicionPelicula(new ContieneTodosGeneros());
 		
 		//Recomendacion personas
-		
+		int cant = 2;
 		System.out.println("-------------------------------\n");
-		System.out.println("3.Ver Recomendacion Lisa");
-		ArrayList<Pelicula> recomendacionLisa = pop_corn_time.recomendar(lisa,2);
-		for(int i = 0; i < recomendacionLisa.size(); i++) {
-			System.out.println("-"+recomendacionLisa.get(i).getTitulo()+".");
-		}
+		System.out.println("Ejercicio 3:");
+		VerRecomendacionUsuario(lisa,pop_corn_time,cant);
 		
-		System.out.println("-------------------------------\n");
-		System.out.println("3.Ver Recomendacion Marge");
-		ArrayList<Pelicula> recomendacionMarge = pop_corn_time.recomendar(marge,2);
-		for(int i = 0; i < recomendacionMarge.size(); i++) {
-			System.out.println("-"+recomendacionMarge.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(marge,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");		
-		System.out.println("3.Ver Recomendacion Bart");
-		ArrayList<Pelicula> recomendacionBart = pop_corn_time.recomendar(bart,2);
-		for(int i = 0; i < recomendacionBart.size(); i++) {
-			System.out.println("-"+recomendacionBart.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(bart,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("3.Ver Recomendacion Homero");
-		ArrayList<Pelicula> recomendacionHomero = pop_corn_time.recomendar(homero,2);
-		for(int i = 0; i < recomendacionHomero.size(); i++) {
-			System.out.println("-"+recomendacionHomero.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(homero,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("3.Ver Recomendacion Maggie");
-		ArrayList<Pelicula> recomendacionMaggie = pop_corn_time.recomendar(maggie,2);
-		for(int i = 0; i < recomendacionMaggie.size(); i++) {
-			System.out.println("-"+recomendacionMaggie.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(maggie,pop_corn_time,cant);
 	
 		//Recomendacion grupos
-		System.out.println("-------------------------------\n");		
-		System.out.println("3.Ver Recomendacion Hombres Simpson");
-		ArrayList<Pelicula> recomendacionHombresSimpson = pop_corn_time.recomendar(hombres_simpson,2);
-		for(int i = 0; i < recomendacionHombresSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHombresSimpson.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(hombres_simpson,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("3.Ver Recomendacion Hermanos Simpson");
-		ArrayList<Pelicula> recomendacionHermanosSimpson = pop_corn_time.recomendar(hermanos_simpson,2);
-		for(int i = 0; i < recomendacionHermanosSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHermanosSimpson.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(hermanos_simpson,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");	
-		System.out.println("3.Ver Recomendacion Familia Simpson");
-		ArrayList<Pelicula> recomendacionFamiliaSimpson = pop_corn_time.recomendar(familia_simpson,2);
-		for(int i = 0; i < recomendacionFamiliaSimpson.size(); i++) {
-			System.out.println("-"+recomendacionFamiliaSimpson.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(familia_simpson,pop_corn_time,cant);
 	
 		//4.Generar 5 recomendaciones para cada uno de los usuarios individuales y grupos creados,
 		//considerando que las películas incluyan ALGUNO de los géneros preferidos por el usuario,
@@ -269,63 +228,25 @@ public class Main {
 		pop_corn_time.setComparador(new ComparadorPorPromedio());
 		
 		//Recomendacion Personas
+		cant = 5;
+		System.out.println("-------------------------------\n");
+		System.out.println("Ejercicio 4:");
+		VerRecomendacionUsuario(lisa,pop_corn_time,cant);
+		
+		VerRecomendacionUsuario(marge,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Lisa");
-		recomendacionLisa = pop_corn_time.recomendar(lisa,5);
-		for(int i = 0; i < recomendacionLisa.size(); i++) {
-			System.out.println("-"+recomendacionLisa.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(bart,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Marge");
-		recomendacionMarge = pop_corn_time.recomendar(marge,5);
-		for(int i = 0; i < recomendacionMarge.size(); i++) {
-			System.out.println("-"+recomendacionMarge.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(homero,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Bart");
-		recomendacionBart = pop_corn_time.recomendar(bart,5);
-		for(int i = 0; i < recomendacionBart.size(); i++) {
-			System.out.println("-"+recomendacionBart.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(maggie,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Homero");
-		recomendacionHomero = pop_corn_time.recomendar(homero,5);
-		for(int i = 0; i < recomendacionHomero.size(); i++) {
-			System.out.println("-"+recomendacionHomero.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Maggie");
-		recomendacionMaggie = pop_corn_time.recomendar(maggie,5);
-		for(int i = 0; i < recomendacionMaggie.size(); i++) {
-			System.out.println("-"+recomendacionMaggie.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
 		//Recomendacion grupos
-		System.out.println("4.Ver Recomendacion Hombres Simpson");
-		recomendacionHombresSimpson = pop_corn_time.recomendar(hombres_simpson,5);
-		for(int i = 0; i < recomendacionHombresSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHombresSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Hermanos Simpson");
-		recomendacionHermanosSimpson = pop_corn_time.recomendar(hermanos_simpson,5);
-		for(int i = 0; i < recomendacionHermanosSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHermanosSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("4.Ver Recomendacion Familia Simpson");
-		recomendacionFamiliaSimpson = pop_corn_time.recomendar(familia_simpson,5);
-		for(int i = 0; i < recomendacionFamiliaSimpson.size(); i++) {
-			System.out.println("-"+recomendacionFamiliaSimpson.get(i).getTitulo()+".");
-		}	
+		VerRecomendacionUsuario(hombres_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(hermanos_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(familia_simpson,pop_corn_time,cant);
 	
 		//5.Incorporar al sistema la información relativa a que los hermanos Simpson vieron la película
 		//Up y la valoraron grupalmente con 4 granos de café.
@@ -333,141 +254,60 @@ public class Main {
 
 		//6.Realizar nuevamente los listados correspondientes a los puntos 2, 3 y 4 anteriores
 		//2.
-		System.out.println("-------------------------------\n");	
-		System.out.println("6.Ver peliculas Bart");
-		itPeliculas = bart.getPeliculasVistas();
-		while(itPeliculas.hasNext()) {
-			System.out.println("-"+itPeliculas.next().getTitulo() +".");
-		}
+		System.out.println("-------------------------------\n");
+		System.out.println("Ejercicio 6:");
+		VerPeliculasUsuario(bart);
 	
 		//3.
 		pop_corn_time.setCondicionPelicula(new ContieneTodosGeneros());
 		
-		//Recomendacion personas
+		//Recomendacion Personas
+		cant=2;
+		VerRecomendacionUsuario(lisa,pop_corn_time,cant);
 		
-		System.out.println("-------------------------------\n");
-		System.out.println("6.3.Ver Recomendacion Lisa");
-		recomendacionLisa = pop_corn_time.recomendar(lisa,2);
-		for(int i = 0; i < recomendacionLisa.size(); i++) {
-			System.out.println("-"+recomendacionLisa.get(i).getTitulo()+".");
-		}
-		
-		System.out.println("-------------------------------\n");
-		System.out.println("6.3.Ver Recomendacion Marge");
-		recomendacionMarge = pop_corn_time.recomendar(marge,2);
-		for(int i = 0; i < recomendacionMarge.size(); i++) {
-			System.out.println("-"+recomendacionMarge.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(marge,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");		
-		System.out.println("6.3.Ver Recomendacion Bart");
-		recomendacionBart = pop_corn_time.recomendar(bart,2);
-		for(int i = 0; i < recomendacionBart.size(); i++) {
-			System.out.println("-"+recomendacionBart.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(bart,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.3.Ver Recomendacion Homero");
-		recomendacionHomero = pop_corn_time.recomendar(homero,2);
-		for(int i = 0; i < recomendacionHomero.size(); i++) {
-			System.out.println("-"+recomendacionHomero.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(homero,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.3.Ver Recomendacion Maggie");
-		recomendacionMaggie = pop_corn_time.recomendar(maggie,2);
-		for(int i = 0; i < recomendacionMaggie.size(); i++) {
-			System.out.println("-"+recomendacionMaggie.get(i).getTitulo()+".");
-		}
-	
+		VerRecomendacionUsuario(maggie,pop_corn_time,cant);
+
 		//Recomendacion grupos
-		System.out.println("-------------------------------\n");		
-		System.out.println("6.3.Ver Recomendacion Hombres Simpson");
-		recomendacionHombresSimpson = pop_corn_time.recomendar(hombres_simpson,2);
-		for(int i = 0; i < recomendacionHombresSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHombresSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.3.Ver Recomendacion Hermanos Simpson");
-		recomendacionHermanosSimpson = pop_corn_time.recomendar(hermanos_simpson,2);
-		for(int i = 0; i < recomendacionHermanosSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHermanosSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");	
-		System.out.println("6.3.Ver Recomendacion Familia Simpson");
-		recomendacionFamiliaSimpson = pop_corn_time.recomendar(familia_simpson,2);
-		for(int i = 0; i < recomendacionFamiliaSimpson.size(); i++) {
-			System.out.println("-"+recomendacionFamiliaSimpson.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(hombres_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(hermanos_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(familia_simpson,pop_corn_time,cant);
 		
 		//4.
 		pop_corn_time.setCondicionPelicula(new ContieneAlgunGenero());
 		pop_corn_time.setComparador(new ComparadorPorPromedio());
 		
 		//Recomendacion Personas
+		cant=5;
+		VerRecomendacionUsuario(lisa,pop_corn_time,cant);
+		
+		VerRecomendacionUsuario(marge,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Lisa");
-		recomendacionLisa = pop_corn_time.recomendar(lisa,5);
-		for(int i = 0; i < recomendacionLisa.size(); i++) {
-			System.out.println("-"+recomendacionLisa.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(bart,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Marge");
-		recomendacionMarge = pop_corn_time.recomendar(marge,5);
-		for(int i = 0; i < recomendacionMarge.size(); i++) {
-			System.out.println("-"+recomendacionMarge.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(homero,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Bart");
-		recomendacionBart = pop_corn_time.recomendar(bart,5);
-		for(int i = 0; i < recomendacionBart.size(); i++) {
-			System.out.println("-"+recomendacionBart.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(maggie,pop_corn_time,cant);
 
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Homero");
-		recomendacionHomero = pop_corn_time.recomendar(homero,5);
-		for(int i = 0; i < recomendacionHomero.size(); i++) {
-			System.out.println("-"+recomendacionHomero.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Maggie");
-		recomendacionMaggie = pop_corn_time.recomendar(maggie,5);
-		for(int i = 0; i < recomendacionMaggie.size(); i++) {
-			System.out.println("-"+recomendacionMaggie.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
 		//Recomendacion grupos
-		System.out.println("6.4.Ver Recomendacion Hombres Simpson");
-		recomendacionHombresSimpson = pop_corn_time.recomendar(hombres_simpson,5);
-		for(int i = 0; i < recomendacionHombresSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHombresSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Hermanos Simpson");
-		recomendacionHermanosSimpson = pop_corn_time.recomendar(hermanos_simpson,5);
-		for(int i = 0; i < recomendacionHermanosSimpson.size(); i++) {
-			System.out.println("-"+recomendacionHermanosSimpson.get(i).getTitulo()+".");
-		}
-
-		System.out.println("-------------------------------\n");			
-		System.out.println("6.4.Ver Recomendacion Familia Simpson");
-		recomendacionFamiliaSimpson = pop_corn_time.recomendar(familia_simpson,5);
-		for(int i = 0; i < recomendacionFamiliaSimpson.size(); i++) {
-			System.out.println("-"+recomendacionFamiliaSimpson.get(i).getTitulo()+".");
-		}
+		VerRecomendacionUsuario(hombres_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(hermanos_simpson,pop_corn_time,cant);
+	
+		VerRecomendacionUsuario(familia_simpson,pop_corn_time,cant);
 		
 		//7.Realizar las siguientes búsquedas:
 		//a.Todas las películas en las que Pete Docter haya actuado y sido director al
 		//mismo tiempo
+		System.out.println("-------------------------------\n");
+		System.out.println("Ejercicio 7:");
 		BuscarActor actor = new BuscarActor("Pete Docter");
 		BuscarDirector director = new BuscarDirector("Pete Docter");
 		BuscarAnd and = new BuscarAnd(actor,director);
@@ -508,5 +348,34 @@ public class Main {
 		for(int i = 0; i < Peliculas_ConGenero.size(); i++) {
 			System.out.println("-"+Peliculas_ConGenero.get(i).getTitulo()+".");
 		}
+	}
+	
+	
+	public static void VerPeliculasUsuario(Usuario u) {
+		System.out.println("-------------------------------\n");		
+		System.out.println("Ver peliculas " + u.getNombre());
+		Iterator<Pelicula> itPeliculas = u.getPeliculasVistas();
+		while(itPeliculas.hasNext()) {
+			System.out.println("-"+itPeliculas.next().getTitulo()+".");
+		}
+	}
+	
+	public static void VerRecomendacionUsuario(Usuario u, Sede s, int cant) {
+		System.out.println("-------------------------------\n");
+		System.out.println("Ver Recomendacion " + u.getNombre());
+		ArrayList<Pelicula> recomendacion = s.recomendar(u,cant);
+		for(int i = 0; i < recomendacion.size(); i++) {
+			System.out.println("-"+recomendacion.get(i).getTitulo()+".");
+		}
+	}
+	
+	public static void MensajeBienvenida(Sede s) {
+		System.out.println("================================");
+		System.out.println("================================");
+		System.out.println("  Bienvenido a " + s.getNombre() +"!");
+		System.out.println("================================");
+		System.out.println("================================");
+		System.out.println("Creadores:\n Eduardo Pereyra Yraola \n Nina Encinosa Castro");
+		System.out.println("================================");
 	}
 }
